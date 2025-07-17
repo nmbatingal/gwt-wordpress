@@ -293,7 +293,7 @@ jQuery(document).ready(function($) {
 
   public function govph_disable_search()
   {
-    $true = ($this->options['govph_disable_search'] == 'true' ? "checked" : "");
+    $true = (isset($this->options['govph_disable_search']) && $this->options['govph_disable_search'] == 'true' ? "checked" : "");
   ?>
 <input type="checkbox" name="govph_options[govph_disable_search]" value="true" <?php echo $true ?>>
 <span class="description">Check to disabled search field</span>
@@ -302,7 +302,7 @@ jQuery(document).ready(function($) {
 
   // <!-- Enable classic editor for widget-->
   public function govph_enable_widget_classic_editor(){
-    $true = ($this->options['govph_enable_widget_classic_editor'] == 'true' ? "checked" : "");
+    $true = (isset($this->options['govph_enable_widget_classic_editor']) && $this->options['govph_enable_widget_classic_editor'] == 'true' ? "checked" : "");
   ?>
 <input type="checkbox" name="govph_options[govph_enable_widget_classic_editor]" value="true" <?php echo $true ?>>
 <span class="description">Check to disabled Gutenberg on widgets</span>
@@ -312,7 +312,7 @@ jQuery(document).ready(function($) {
 
   // <!-- Enable classic editor for post-->
   public function govph_enable_post_classic_editor(){
-    $true = ($this->options['govph_enable_post_classic_editor'] == 'true' ? "checked" : "");
+    $true = (isset($this->options['govph_enable_post_classic_editor']) && $this->options['govph_enable_post_classic_editor'] == 'true' ? "checked" : "");
   ?>
 <input type="checkbox" name="govph_options[govph_enable_post_classic_editor]" value="true" <?php echo $true ?>>
 <span class="description">Check to disabled Gutenberg on posts</span>
@@ -321,8 +321,8 @@ jQuery(document).ready(function($) {
   // End for enable classic Editor for post
 
   public function govph_logo_position_setting(){
-    $left = ($this->options['govph_logo_position'] == 'left' ? "checked" : "");
-    $center = ($this->options['govph_logo_position'] == 'center' ? "checked" : "");
+    $left = (isset($this->options['govph_logo_position']) && $this->options['govph_logo_position'] == 'left' ? "checked" : "");
+    $center = (isset($this->options['govph_logo_position']) && $this->options['govph_logo_position'] == 'center' ? "checked" : "");
   ?>
 <input type="radio" name="govph_options[govph_logo_position]" value="left" <?php echo $left ?>> Left <br>
 <input type="radio" name="govph_options[govph_logo_position]" value="center" <?php echo $center ?>> Center
@@ -335,14 +335,14 @@ jQuery(document).ready(function($) {
   ?>
 <label for="upload_image">
     <input id="upload_image" type="text" size="36" name="govph_options[govph_logo]"
-        value="<?php echo $this->options['govph_logo']; ?>" />
+        value="<?php echo isset($this->options['govph_logo']) ? esc_attr($this->options['govph_logo']) : ''; ?>" />
     <input id="upload_image_button" class="button" type="button" value="Upload Logo" />
     <br /><span class="description">Enter a URL or upload an image</span>
 </label>
 
 <?php
     if (!empty($this->options['govph_logo'])) {
-      echo '<br/><img src="'.$this->options['govph_logo'].'" height="100px" alt="" style="background: #ddd; padding: 10px;">';
+      echo '<br/><img src="'.esc_url($this->options['govph_logo']).'" height="100px" alt="" style="background: #ddd; padding: 10px;">';
     }
   }
 
@@ -365,7 +365,7 @@ jQuery(document).ready(function($) {
 
   public function govph_agency_name()
   {
-    $value = $this->options['govph_agency_name'] ? $this->options['govph_agency_name'] : '';
+    $value = isset($this->options['govph_agency_name']) && $this->options['govph_agency_name'] ? $this->options['govph_agency_name'] : '';
   ?>
 <input type="text" name="govph_options[govph_agency_name]" value="<?php echo $value ?>" style="width: 400px;"><br />
 <span class="description">The agency website name.</span>
@@ -374,7 +374,7 @@ jQuery(document).ready(function($) {
 
   public function govph_agency_tagline()
   {
-    $value = $this->options['govph_agency_tagline'] ? $this->options['govph_agency_tagline'] : '';
+    $value = isset($this->options['govph_agency_tagline']) && $this->options['govph_agency_tagline'] ? $this->options['govph_agency_tagline'] : '';
   ?>
 <input type="text" name="govph_options[govph_agency_tagline]" value="<?php echo $value ?>" style="width: 400px;"><br />
 <span class="description">The agency tagline.</span>
@@ -384,7 +384,7 @@ jQuery(document).ready(function($) {
   public function govph_header_color_setting()
   {
   ?>
-<input name="govph_options[govph_headercolor]" type="text" value="<?php echo $this->options['govph_headercolor']; ?>"
+<input name="govph_options[govph_headercolor]" type="text" value="<?php echo isset($this->options['govph_headercolor']) ? esc_attr($this->options['govph_headercolor']) : ''; ?>"
     class="my-color-field" id="color-field-header-bg" data-default-color="#142745" />
 <?php
   }
@@ -403,19 +403,19 @@ jQuery(document).ready(function($) {
   ?>
 <label for="header_image_background">
     <input id="header_image_background" type="text" size="36" name="govph_options[govph_headerimage]"
-        value="<?php echo $this->options['govph_headerimage']; ?>" />
+        value="<?php echo isset($this->options['govph_headerimage']) ? esc_attr($this->options['govph_headerimage']) : ''; ?>" />
     <input id="header_image_background_button" class="button" type="button" value="Upload Image" />
     <br /><span class="description">Enter a URL or upload an image for header background.</span>
 </label>
 <?php
     if (!empty($this->options['govph_headerimage'])) {
-      echo '<br/><img src="'.$this->options['govph_headerimage'].'" height="100px" style="background: #ddd; padding: 10px;">';
+      echo '<br/><img src="'.esc_url($this->options['govph_headerimage']).'" height="100px" style="background: #ddd; padding: 10px;">';
     }
   }
 
   // Background Header Image Size to full width
   public function govph_background_header_size_fullwith_setting(){
-    $true = ($this->options['govph_background_header_size'] == 'true' ? "checked" : "");
+    $true = (isset($this->options['govph_background_header_size']) && $this->options['govph_background_header_size'] == 'true' ? "checked" : "");
     ?>
 <input type="checkbox" name="govph_options[govph_background_header_size]" value="true" <?php echo $true ?>>
 <span class="description">Check to display background header image in full width</span>
@@ -426,7 +426,7 @@ jQuery(document).ready(function($) {
   public function govph_slider_color_setting()
   {
   ?>
-<input name="govph_options[govph_slidercolor]" type="text" value="<?php echo $this->options['govph_slidercolor']; ?>"
+<input name="govph_options[govph_slidercolor]" type="text" value="<?php echo isset($this->options['govph_slidercolor']) ? esc_attr($this->options['govph_slidercolor']) : ''; ?>"
     class="my-color-field" id="color-field-slider" data-default-color="#1f3a70" />
 <?php
   }
@@ -436,19 +436,19 @@ jQuery(document).ready(function($) {
   ?>
 <label for="slider_image_background">
     <input id="slider_image_background" type="text" size="36" name="govph_options[govph_sliderimage]"
-        value="<?php echo $this->options['govph_sliderimage']; ?>" />
+        value="<?php echo isset($this->options['govph_sliderimage']) ? esc_attr($this->options['govph_sliderimage']) : ''; ?>" />
     <input id="slider_image_background_button" class="button" type="button" value="Upload Image" />
     <br /><span class="description">Enter a URL or upload an image for header background</span>
 </label>
 <?php
     if (!empty($this->options['govph_sliderimage'])) {
-      echo '<br/><img src="'.$this->options['govph_sliderimage'].'" height="200px" alt="'.$alt.'" style="background: #ddd; padding: 10px;">';
+      echo '<br/><img src="'.esc_url($this->options['govph_sliderimage']).'" height="200px" alt="'.$alt.'" style="background: #ddd; padding: 10px;">';
     }
   }
 
   public function govph_slider_fullwidth()
   {
-    $true = ($this->options['govph_slider_fullwidth'] == 'true' ? "checked" : "");
+    $true = (isset($this->options['govph_slider_fullwidth']) && $this->options['govph_slider_fullwidth'] == 'true' ? "checked" : "");
   ?>
 <input type="checkbox" name="govph_options[govph_slider_fullwidth]" value="true" <?php echo $true ?>>
 <span class="description">Check to display the slider in full width</span>
@@ -457,7 +457,7 @@ jQuery(document).ready(function($) {
 
   public function govph_breadcrumbs_enable()
   {
-    $true = ($this->options['govph_breadcrumbs_enable'] == 'true' ? "checked" : "");
+    $true = (isset($this->options['govph_breadcrumbs_enable']) && $this->options['govph_breadcrumbs_enable'] == 'true' ? "checked" : "");
   ?>
 <input type="checkbox" name="govph_options[govph_breadcrumbs_enable]" value="true" <?php echo $true ?>>
 <span class="description">Check to display Breadcrumbs</span>
@@ -466,7 +466,7 @@ jQuery(document).ready(function($) {
 
   public function govph_breadcrumbs_separator()
   {
-    $value = $this->options['govph_breadcrumbs_separator'] ? $this->options['govph_breadcrumbs_separator'] : ' › ';
+    $value = isset($this->options['govph_breadcrumbs_separator']) && $this->options['govph_breadcrumbs_separator'] ? $this->options['govph_breadcrumbs_separator'] : ' › ';
   ?>
 <input type="text" name="govph_options[govph_breadcrumbs_separator]" value="<?php echo $value ?>"><br />
 <span class="description">Separator symbol in between breadcrumb links</span>
@@ -475,7 +475,7 @@ jQuery(document).ready(function($) {
 
   public function govph_breadcrumbs_show_home()
   {
-    $true = ($this->options['govph_breadcrumbs_show_home'] == 'true' ? "checked" : "");
+    $true = (isset($this->options['govph_breadcrumbs_show_home']) && $this->options['govph_breadcrumbs_show_home'] == 'true' ? "checked" : "");
   ?>
 <input type="checkbox" name="govph_options[govph_breadcrumbs_show_home]" value="true" <?php echo $true ?>>
 <span class="description">Check to show homepage link at the start of the breadcrumbs</span>
@@ -496,7 +496,7 @@ jQuery(document).ready(function($) {
   {
     $govph_custom_pst = !empty($this->options['govph_custom_pst']) ? $this->options['govph_custom_pst'] : '#000000';
   ?>
-<input name="govph_options[govph_custom_pst]" type="text" value="<?php echo $this->options['govph_custom_pst']; ?>"
+<input name="govph_options[govph_custom_pst]" type="text" value="<?php echo isset($this->options['govph_custom_pst']) ? esc_attr($this->options['govph_custom_pst']) : ''; ?>"
     class="my-color-field" id="color-field-pst" data-default-color="#000000" />
 <br><span class="description">Philippine Standard Time (PST) font customization</span>
 <?php
@@ -506,7 +506,7 @@ jQuery(document).ready(function($) {
   {
   ?>
 <input name="govph_options[govph_custom_anchorcolor]" type="text"
-    value="<?php echo $this->options['govph_custom_anchorcolor']; ?>" class="my-color-field" id="color-field-anchor"
+    value="<?php echo isset($this->options['govph_custom_anchorcolor']) ? esc_attr($this->options['govph_custom_anchorcolor']) : ''; ?>" class="my-color-field" id="color-field-anchor"
     data-default-color="#2ba6cb" />
 <br><span class="description">Change active links font color</span>
 <?php
@@ -516,7 +516,7 @@ jQuery(document).ready(function($) {
   {
   ?>
 <input name="govph_options[govph_custom_anchorcolor_hover]" type="text"
-    value="<?php echo $this->options['govph_custom_anchorcolor_hover']; ?>" class="my-color-field"
+    value="<?php echo isset($this->options['govph_custom_anchorcolor_hover']) ? esc_attr($this->options['govph_custom_anchorcolor_hover']) : ''; ?>" class="my-color-field"
     id="color-field-anchor-hover" data-default-color="#258faf" />
 <br><span class="description">Change active links font color</span>
 <?php
@@ -527,7 +527,7 @@ jQuery(document).ready(function($) {
     $govph_custom_panel_top = !empty($this->options['govph_custom_panel_top']) ? $this->options['govph_custom_panel_top'] : '#fffff';
   ?>
 <input name="govph_options[govph_custom_panel_top]" type="text"
-    value="<?php echo $this->options['govph_custom_panel_top']; ?>" class="my-color-field" id="color-field-panel-top"
+    value="<?php echo isset($this->options['govph_custom_panel_top']) ? esc_attr($this->options['govph_custom_panel_top']) : ''; ?>" class="my-color-field" id="color-field-panel-top"
     data-default-color="#ffffff" />
 <br><span class="description">Background color for Panel Top section</span>
 <?php
@@ -538,7 +538,7 @@ jQuery(document).ready(function($) {
     $govph_custom_border_color = !empty($this->options['govph_custom_border_color']) ? $this->options['govph_custom_panel_bottom'] : '#fffff';
   ?>
 <input name="govph_options[govph_custom_panel_bottom]" type="text"
-    value="<?php echo $this->options['govph_custom_panel_bottom']; ?>" class="my-color-field"
+    value="<?php echo isset($this->options['govph_custom_panel_bottom']) ? esc_attr($this->options['govph_custom_panel_bottom']) : ''; ?>" class="my-color-field"
     id="color-field-panel-bottom" data-default-color="#fffff" />
 <br><span class="description">Background color for Panel Bottom section</span>
 <?php
@@ -546,12 +546,12 @@ jQuery(document).ready(function($) {
 
   public function govph_custom_border_width()
   { 
-    $zero = ($this->options['govph_custom_border_width'] == 0 ? "selected" : "");
-    $one = ($this->options['govph_custom_border_width'] == 1 ? "selected" : "");
-    $two = ($this->options['govph_custom_border_width'] == 2 ? "selected" : "");
-    $three = ($this->options['govph_custom_border_width'] == 3 ? "selected" : "");
-    $four = ($this->options['govph_custom_border_width'] == 4 ? "selected" : "");
-    $five = ($this->options['govph_custom_border_width'] == 5 ? "selected" : "");
+    $zero = (isset($this->options['govph_custom_border_width']) && $this->options['govph_custom_border_width'] == 0 ? "selected" : "");
+    $one = (isset($this->options['govph_custom_border_width']) && $this->options['govph_custom_border_width'] == 1 ? "selected" : "");
+    $two = (isset($this->options['govph_custom_border_width']) && $this->options['govph_custom_border_width'] == 2 ? "selected" : "");
+    $three = (isset($this->options['govph_custom_border_width']) && $this->options['govph_custom_border_width'] == 3 ? "selected" : "");
+    $four = (isset($this->options['govph_custom_border_width']) && $this->options['govph_custom_border_width'] == 4 ? "selected" : "");
+    $five = (isset($this->options['govph_custom_border_width']) && $this->options['govph_custom_border_width'] == 5 ? "selected" : "");
   ?>
 <select name="govph_options[govph_custom_border_width]">
     <option value="">-- Select --</option>
@@ -568,17 +568,17 @@ jQuery(document).ready(function($) {
 
   public function govph_custom_border_radius()
   {
-    $zero = ($this->options['govph_custom_border_radius'] == 0 ? "selected" : "");
-    $two = ($this->options['govph_custom_border_radius'] == 2 ? "selected" : "");
-    $four = ($this->options['govph_custom_border_radius'] == 4 ? "selected" : "");
-    $six = ($this->options['govph_custom_border_radius'] == 6 ? "selected" : "");
-    $eight = ($this->options['govph_custom_border_radius'] == 8 ? "selected" : "");
-    $ten = ($this->options['govph_custom_border_radius'] == 10 ? "selected" : "");
-    $ztwo = ($this->options['govph_custom_border_radius'] == 12 ? "selected" : "");
-    $zfour = ($this->options['govph_custom_border_radius'] == 14 ? "selected" : "");
-    $zsix = ($this->options['govph_custom_border_radius'] == 16 ? "selected" : "");
-    $zeight = ($this->options['govph_custom_border_radius'] == 18 ? "selected" : "");
-    $zten = ($this->options['govph_custom_border_radius'] == 20 ? "selected" : "");
+    $zero = (isset($this->options['govph_custom_border_radius']) && $this->options['govph_custom_border_radius'] == 0 ? "selected" : "");
+    $two = (isset($this->options['govph_custom_border_radius']) && $this->options['govph_custom_border_radius'] == 2 ? "selected" : "");
+    $four = (isset($this->options['govph_custom_border_radius']) && $this->options['govph_custom_border_radius'] == 4 ? "selected" : "");
+    $six = (isset($this->options['govph_custom_border_radius']) && $this->options['govph_custom_border_radius'] == 6 ? "selected" : "");
+    $eight = (isset($this->options['govph_custom_border_radius']) && $this->options['govph_custom_border_radius'] == 8 ? "selected" : "");
+    $ten = (isset($this->options['govph_custom_border_radius']) && $this->options['govph_custom_border_radius'] == 10 ? "selected" : "");
+    $ztwo = (isset($this->options['govph_custom_border_radius']) && $this->options['govph_custom_border_radius'] == 12 ? "selected" : "");
+    $zfour = (isset($this->options['govph_custom_border_radius']) && $this->options['govph_custom_border_radius'] == 14 ? "selected" : "");
+    $zsix = (isset($this->options['govph_custom_border_radius']) && $this->options['govph_custom_border_radius'] == 16 ? "selected" : "");
+    $zeight = (isset($this->options['govph_custom_border_radius']) && $this->options['govph_custom_border_radius'] == 18 ? "selected" : "");
+    $zten = (isset($this->options['govph_custom_border_radius']) && $this->options['govph_custom_border_radius'] == 20 ? "selected" : "");
   ?>
 <select name="govph_options[govph_custom_border_radius]">
     <option value="">-- Select --</option>
@@ -603,7 +603,7 @@ jQuery(document).ready(function($) {
     $govph_custom_border_color = !empty($this->options['govph_custom_border_color']) ? $this->options['govph_custom_border_color'] : '#bfbfbf';
   ?>
 <input name="govph_options[govph_custom_border_color]" type="text"
-    value="<?php echo $this->options['govph_custom_border_color']; ?>" class="my-color-field"
+    value="<?php echo isset($this->options['govph_custom_border_color']) ? esc_attr($this->options['govph_custom_border_color']) : ''; ?>" class="my-color-field"
     id="color-field-border-color" data-default-color="#bfbfbf" />
 <br><span class="description">Border color for widgets and main content area</span>
 <?php
@@ -614,7 +614,7 @@ jQuery(document).ready(function($) {
     $govph_custom_background_color = !empty($this->options['govph_custom_background_color']) ? $this->options['govph_custom_background_color'] : '#fcfcfc';
   ?>
 <input name="govph_options[govph_custom_background_color]" type="text"
-    value="<?php echo $this->options['govph_custom_background_color']; ?>" class="my-color-field"
+    value="<?php echo isset($this->options['govph_custom_background_color']) ? esc_attr($this->options['govph_custom_background_color']) : ''; ?>" class="my-color-field"
     id="color-field-widget-bg" data-default-color="#fcfcfc" />
 <br><span class="description">Background color for widgets and main content area</span>
 <?php
@@ -639,10 +639,10 @@ jQuery(document).ready(function($) {
 
   public function govph_custom_headings_text()
   {
-    $nl = ($this->options['govph_custom_headings_text'] == "none" ? "selected" : "");
-    $ups = ($this->options['govph_custom_headings_text'] == "uppercase" ? "selected" : "");
-    $lws = ($this->options['govph_custom_headings_text'] == "lowercase" ? "selected" : "");
-    $caps = ($this->options['govph_custom_headings_text'] == "capitalize" ? "selected" : "");
+    $nl = (isset($this->options['govph_custom_headings_text']) && $this->options['govph_custom_headings_text'] == "none" ? "selected" : "");
+    $ups = (isset($this->options['govph_custom_headings_text']) && $this->options['govph_custom_headings_text'] == "uppercase" ? "selected" : "");
+    $lws = (isset($this->options['govph_custom_headings_text']) && $this->options['govph_custom_headings_text'] == "lowercase" ? "selected" : "");
+    $caps = (isset($this->options['govph_custom_headings_text']) && $this->options['govph_custom_headings_text'] == "capitalize" ? "selected" : "");
   ?>
 <select name="govph_options[govph_custom_headings_text]">
     <option value="">-- Select --</option>
@@ -657,9 +657,9 @@ jQuery(document).ready(function($) {
 
   public function govph_custom_headings_size()
   {
-    $sm = ($this->options['govph_custom_headings_size'] == 0.8 ? "selected" : "");
-    $nl = ($this->options['govph_custom_headings_size'] == 1 ? "selected" : "");
-    $lr = ($this->options['govph_custom_headings_size'] == 1.6 ? "selected" : "");
+    $sm = (isset($this->options['govph_custom_headings_size']) && $this->options['govph_custom_headings_size'] == 0.8 ? "selected" : "");
+    $nl = (isset($this->options['govph_custom_headings_size']) && $this->options['govph_custom_headings_size'] == 1 ? "selected" : "");
+    $lr = (isset($this->options['govph_custom_headings_size']) && $this->options['govph_custom_headings_size'] == 1.6 ? "selected" : "");
   ?>
 <select name="govph_options[govph_custom_headings_size]">
     <option value="">-- Select --</option>
@@ -673,9 +673,9 @@ jQuery(document).ready(function($) {
 
   public function govph_custom_headings_inner_page_size()
   {
-    $sm = ($this->options['govph_custom_headings_inner_page_size'] == 2 ? "selected" : "");
-    $nl = ($this->options['govph_custom_headings_inner_page_size'] == 2.69 ? "selected" : "");
-    $lr = ($this->options['govph_custom_headings_inner_page_size'] == 3.5 ? "selected" : "");
+    $sm = (isset($this->options['govph_custom_headings_inner_page_size']) && $this->options['govph_custom_headings_inner_page_size'] == 2 ? "selected" : "");
+    $nl = (isset($this->options['govph_custom_headings_inner_page_size']) && $this->options['govph_custom_headings_inner_page_size'] == 2.69 ? "selected" : "");
+    $lr = (isset($this->options['govph_custom_headings_inner_page_size']) && $this->options['govph_custom_headings_inner_page_size'] == 3.5 ? "selected" : "");
   ?>
 <select name="govph_options[govph_custom_headings_inner_page_size]">
     <option value="">-- Select --</option>
@@ -692,7 +692,7 @@ jQuery(document).ready(function($) {
     $govph_custom_footer_background_color = !empty($this->options['govph_custom_footer_background_color']) ? $this->options['govph_custom_footer_background_color'] : '#002642';
   ?>
 <input name="govph_options[govph_custom_footer_background_color]" type="text"
-    value="<?php echo $this->options['govph_custom_footer_background_color']; ?>" class="my-color-field"
+    value="<?php echo isset($this->options['govph_custom_footer_background_color']) ? esc_attr($this->options['govph_custom_footer_background_color']) : ''; ?>" class="my-color-field"
     id="color-field-footer-bg" data-default-color="#002642" />
 <br><span class="description">Background color for agency footer section</span>
 <?php
@@ -709,7 +709,7 @@ jQuery(document).ready(function($) {
   }
 
   public function govph_content_show_pub_date(){
-    $true = ($this->options['govph_content_show_pub_date'] == 'true' || !empty($this->options['govph_content_show_pub_date']) ? "checked" : "");
+    $true = (isset($this->options['govph_content_show_pub_date']) && ($this->options['govph_content_show_pub_date'] == 'true' || !empty($this->options['govph_content_show_pub_date'])) ? "checked" : "");
   ?>
 <input type="checkbox" name="govph_options[govph_content_show_pub_date]" value="true" <?php echo $true ?>>
 <span class="description">Check to display the published date on posts</span>
@@ -725,7 +725,7 @@ jQuery(document).ready(function($) {
   }
 
   public function govph_content_show_author(){
-    $true = ($this->options['govph_content_show_author'] == 'true' ? "checked" : "");
+    $true = (isset($this->options['govph_content_show_author']) && $this->options['govph_content_show_author'] == 'true' ? "checked" : "");
   ?>
 <input type="checkbox" name="govph_options[govph_content_show_author]" value="true" <?php echo $true ?>>
 <span class="description">Check to display the author</span>
@@ -765,7 +765,7 @@ jQuery(document).ready(function($) {
 
   public function govph_acc_link_statement()
   {
-    $value = $this->options['govph_acc_link_statement'] ? $this->options['govph_acc_link_statement'] : '';
+    $value = isset($this->options['govph_acc_link_statement']) && $this->options['govph_acc_link_statement'] ? $this->options['govph_acc_link_statement'] : '';
   ?>
 <span class="field-prefix"><?php echo get_site_url(); ?>/ </span>
 <input type="text" name="govph_options[govph_acc_link_statement]" value="<?php echo $value ?>"><br />
@@ -775,7 +775,7 @@ jQuery(document).ready(function($) {
 
   public function govph_acc_link_home()
   {
-    $value = $this->options['govph_acc_link_home'] ? $this->options['govph_acc_link_home'] : '';
+    $value = isset($this->options['govph_acc_link_home']) && $this->options['govph_acc_link_home'] ? $this->options['govph_acc_link_home'] : '';
   ?>
 <span class="field-prefix"><?php echo get_site_url(); ?>/ </span>
 <input type="text" name="govph_options[govph_acc_link_home]" value="<?php echo $value ?>"><br />
@@ -785,7 +785,7 @@ jQuery(document).ready(function($) {
 
   public function govph_acc_link_main_content()
   {
-    $value = $this->options['govph_acc_link_main_content'] ? $this->options['govph_acc_link_main_content'] : '#main-content';
+    $value = isset($this->options['govph_acc_link_main_content']) && $this->options['govph_acc_link_main_content'] ? $this->options['govph_acc_link_main_content'] : '#main-content';
   ?>
 <span class="field-prefix">{current_url}/ </span>
 <input type="text" name="govph_options[govph_acc_link_main_content]" value="<?php echo $value ?>"><br />
@@ -798,7 +798,7 @@ jQuery(document).ready(function($) {
   ?>
 <span class="field-prefix"><?php echo get_site_url(); ?>/ </span>
 <input type="text" name="govph_options[govph_acc_link_contact]"
-    value="<?php echo $this->options['govph_acc_link_contact'] ?>">
+    value="<?php echo isset($this->options['govph_acc_link_contact']) ? esc_attr($this->options['govph_acc_link_contact']) : ''; ?>">
 <?php
   }
 
@@ -807,7 +807,7 @@ jQuery(document).ready(function($) {
   ?>
 <span class="field-prefix"><?php echo get_site_url(); ?>/ </span>
 <input type="text" name="govph_options[govph_acc_link_feedback]"
-    value="<?php echo $this->options['govph_acc_link_feedback'] ?>">
+    value="<?php echo isset($this->options['govph_acc_link_feedback']) ? esc_attr($this->options['govph_acc_link_feedback']) : ''; ?>">
 <?php
   }
 
@@ -815,13 +815,13 @@ jQuery(document).ready(function($) {
   {
   ?>
 <span class="field-prefix"><?php echo get_site_url(); ?>/ </span>
-<input type="text" name="govph_options[govph_acc_link_faq]" value="<?php echo $this->options['govph_acc_link_faq'] ?>">
+<input type="text" name="govph_options[govph_acc_link_faq]" value="<?php echo isset($this->options['govph_acc_link_faq']) ? esc_attr($this->options['govph_acc_link_faq']) : ''; ?>">
 <?php
   }
 
   public function govph_acc_link_sitemap()
   {
-    $value = $this->options['govph_acc_link_sitemap'] ? $this->options['govph_acc_link_sitemap'] : '#gwt-standard-footer';
+    $value = isset($this->options['govph_acc_link_sitemap']) && $this->options['govph_acc_link_sitemap'] ? $this->options['govph_acc_link_sitemap'] : '#gwt-standard-footer';
   ?>
 <span class="field-prefix">{current_url}/ </span>
 <input type="text" name="govph_options[govph_acc_link_sitemap]" value="<?php echo $value ?>"><br />
@@ -836,7 +836,7 @@ jQuery(document).ready(function($) {
   ?>
 <span class="field-prefix"><?php echo get_site_url(); ?>/ </span>
 <input type="text" name="govph_options[govph_acc_link_search]"
-    value="<?php echo $this->options['govph_acc_link_search'] ?>"><br />
+    value="<?php echo isset($this->options['govph_acc_link_search']) ? esc_attr($this->options['govph_acc_link_search']) : ''; ?>"><br />
 <span class="description">Note: Create a new page by going to "Pages" and click "Add New" button. <br />In the content
     area,
     click "Add
@@ -882,13 +882,13 @@ function govph_displayoptions( $options ){
       break;
     case 'govph_logo':
       $logo_image = (!empty($option['govph_logo']) ? $option['govph_logo'] : get_template_directory_uri().'/images/logo-masthead-large.png');
-      $addLogo = ($option['govph_logo_enable'] == 1) ? '<img src="'.$logo_image.'" />' : 
+      $addLogo = (isset($option['govph_logo_enable']) && $option['govph_logo_enable'] == 1) ? '<img src="'.$logo_image.'" />' : 
       '<div id="textlogo-wrapper">
-        <div id="textlogo-image"><img alt="'.$option['govph_agency_name'].' Official Logo" src="'.$logo_image.'" height="100px" width="100px"/></div>
+        <div id="textlogo-image"><img alt="'.(isset($option['govph_agency_name']) ? esc_attr($option['govph_agency_name']) : '').' Official Logo" src="'.$logo_image.'" height="100px" width="100px"/></div>
         <div id="textlogo-inner-wrapper">
           <div id="agency-heading">Republic of the Philippines</div>
-          <div id="agency-name">'.$option['govph_agency_name'].'</div>
-          <div id="agency-tagline">'.$option['govph_agency_tagline'].'</div>
+          <div id="agency-name">'.(isset($option['govph_agency_name']) ? esc_html($option['govph_agency_name']) : '').'</div>
+          <div id="agency-tagline">'.(isset($option['govph_agency_tagline']) ? esc_html($option['govph_agency_tagline']) : '').'</div>
         </div>
        </div>' ;
       echo $addLogo;
@@ -899,7 +899,8 @@ function govph_displayoptions( $options ){
       echo $headerSetting;
       break;
     case 'govph_background_header_size_setting':
-      if ($option['govph_background_header_size'] == 'true') {
+      if (isset($option['govph_background_header_size']) && $option['govph_background_header_size'] == 'true') {
+        $backgroundHeaderImageSizeSetting = '';
         $backgroundHeaderImageSizeSetting .= 'background-size: cover;';
         $backgroundHeaderImageSizeSetting .= 'background-position: center;';
       }
@@ -908,7 +909,7 @@ function govph_displayoptions( $options ){
     case 'govph_slider_setting':
       $sliderSetting = (!empty($option['govph_sliderimage']) ? 'background-image:url("'.$option['govph_sliderimage'].'");background-size:cover;' : '');
       $sliderSetting .= (!empty($option['govph_slidercolor']) ? 'background-color:'.$option['govph_slidercolor'].';' : '');
-      if ($option['govph_slider_fullwidth'] == 'true') {
+      if (isset($option['govph_slider_fullwidth']) && $option['govph_slider_fullwidth'] == 'true') {
         $sliderSetting .= 'padding: 0;';
         $sliderSetting .= 'border-top: none;';
       }
@@ -923,17 +924,17 @@ function govph_displayoptions( $options ){
       echo $anchorColor;
       break;
     case 'govph_disable_search':
-      return ($option['govph_disable_search'] ? false  : true);
+      return (isset($option['govph_disable_search']) && $option['govph_disable_search'] ? false  : true);
       break;
     // TODO: disable option for widget position, make it dynamic, displays sidebars when atleast one widget is active
     // Start of case for disable gutenberg on widgets
     case 'govph_enable_widget_classic_editor':
-      return ($option['govph_enable_widget_classic_editor'] ? false  : true);
+      return (isset($option['govph_enable_widget_classic_editor']) && $option['govph_enable_widget_classic_editor'] ? false  : true);
       break;
     // End of case for disable gutenberg on widgets
     // Start of case for disable gutenberg on posts
     case 'govph_enable_post_classic_editor':
-      return ($option['govph_enable_post_classic_editor'] ? false  : true);
+      return (isset($option['govph_enable_post_classic_editor']) && $option['govph_enable_post_classic_editor'] ? false  : true);
       break;
     // End of case for disable gutenberg on posts
     case 'govph_content_position':
@@ -1024,45 +1025,45 @@ function govph_displayoptions( $options ){
       echo $val;
       break;
     case 'govph_slider_full':
-      if ($option['govph_slider_fullwidth'] == 'true') {
+      if (isset($option['govph_slider_fullwidth']) && $option['govph_slider_fullwidth'] == 'true') {
         $val = 'active';
         return $val;
       }
       break;
     case 'govph_slider_start':
-      if ($option['govph_slider_fullwidth'] == 'true') {
+      if (isset($option['govph_slider_fullwidth']) && $option['govph_slider_fullwidth'] == 'true') {
         echo '';
       }
-      elseif ($option['govph_slider_fullwidth'] != 'true' || is_active_sidebar('banner-section-1') || is_active_sidebar('banner-section-2')) {
+      elseif (!isset($option['govph_slider_fullwidth']) || $option['govph_slider_fullwidth'] != 'true' || is_active_sidebar('banner-section-1') || is_active_sidebar('banner-section-2')) {
         echo '<div class="row">';
       }
       break;
     case 'govph_slider_end':
-      if ($option['govph_slider_fullwidth'] == 'true') {
+      if (isset($option['govph_slider_fullwidth']) && $option['govph_slider_fullwidth'] == 'true') {
         echo '';
       }
-      elseif ($option['govph_slider_fullwidth'] != 'true' || is_active_sidebar('banner-section-1') || is_active_sidebar('banner-section-2')) {
+      elseif (!isset($option['govph_slider_fullwidth']) || $option['govph_slider_fullwidth'] != 'true' || is_active_sidebar('banner-section-1') || is_active_sidebar('banner-section-2')) {
         echo '</div>';
       }
       break;
     case 'govph_banner_title_start':
-      if ($option['govph_slider_fullwidth'] == 'true') {
+      if (isset($option['govph_slider_fullwidth']) && $option['govph_slider_fullwidth'] == 'true') {
         echo '<div class="row">';
       }
-      elseif ($option['govph_slider_fullwidth'] != 'true') {
+      elseif (!isset($option['govph_slider_fullwidth']) || $option['govph_slider_fullwidth'] != 'true') {
         echo '';
       }
       break;
     case 'govph_banner_title_end':
-      if ($option['govph_slider_fullwidth'] == 'true') {
+      if (isset($option['govph_slider_fullwidth']) && $option['govph_slider_fullwidth'] == 'true') {
         echo '</div>';
       } 
-      elseif ($option['govph_slider_fullwidth'] != 'true') {
+      elseif (!isset($option['govph_slider_fullwidth']) || $option['govph_slider_fullwidth'] != 'true') {
         echo '';
       }
       break;
     case 'govph_slider_fullwidth':
-      if ($option['govph_slider_fullwidth'] != 'true') {
+      if (!isset($option['govph_slider_fullwidth']) || $option['govph_slider_fullwidth'] != 'true') {
         echo 'display: block;';
       }
       else {
@@ -1157,20 +1158,24 @@ function govph_displayoptions( $options ){
       echo $widgetSetting;
       break;
     case 'govph_menu_color_setting': 
+      $menuSetting = '';
       $menuSetting .= (!empty($option['govph_custom_menu_color']) ? 'background-color:'.$option['govph_custom_menu_color'].';' : '');
       echo $menuSetting;
       break;
     case 'govph_menu_font_setting': 
+      $menuFontSetting = '';
       $menuFontSetting .= (!empty($option['govph_custom_menu_font_color']) ? 'color:'.$option['govph_custom_menu_font_color'].';' : '');
       $menuFontSetting .= (!empty($option['govph_custom_menu_font_color']) ? 'border-color:'.$option['govph_custom_menu_font_color'].' '.'transparent;' : '');
       echo $menuFontSetting;
       break;
       // $menuFontSetting .= (!empty($option['govph_custom_menu_font_color']) ? 'border-color:'.$option['govph_custom_menu_font_color'].' '.'transparent;' : '');
     case 'govph_menu_font_hover_setting': 
+      $menuFontHoverSetting = '';
       $menuFontHoverSetting .= (!empty($option['govph_custom_menu_font_color_hover']) ? 'color:'.$option['govph_custom_menu_font_color_hover'].';' : '');
       echo $menuFontHoverSetting;
       break;
     case 'govph_menu_font_accessibility_setting': 
+      $menuFontSetting = '';
       $menuFontSetting .= (!empty($option['govph_custom_menu_font_color']) ? 'color:'.$option['govph_custom_menu_font_color'].';' : '');
       echo $menuFontSetting;
       break;
