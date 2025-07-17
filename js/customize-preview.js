@@ -13,28 +13,28 @@
 
 	// Site title.
 	api( 'blogname', function( value ) {
-		value.bind( function( to ) {
+		value.on( function( to ) {
 			$( '.site-title a' ).text( to );
 		} );
 	} );
 
 	// Site tagline.
 	api( 'blogdescription', function( value ) {
-		value.bind( function( to ) {
+		value.on( function( to ) {
 			$( '.site-description' ).text( to );
 		} );
 	} );
 
 	// Add custom-background-image body class when background image is added.
 	api( 'background_image', function( value ) {
-		value.bind( function( to ) {
+		value.on( function( to ) {
 			$( 'body' ).toggleClass( 'custom-background-image', '' !== to );
 		} );
 	} );
 
 	// Color Scheme CSS.
-	api.bind( 'preview-ready', function() {
-		api.preview.bind( 'update-color-scheme-css', function( css ) {
+	api.on( 'preview-ready', function() {
+		api.preview.on( 'update-color-scheme-css', function( css ) {
 			style.html( css );
 		} );
 	} );

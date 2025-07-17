@@ -90,7 +90,8 @@ function slider_link_save_meta_box_data( $post_id ){
   }
 
   if ( isset( $_REQUEST['slider_link'] ) ) {
-    update_post_meta( $post_id, '_slider_link', sanitize_text_field( $_POST['slider_link'] ) );
+    $slider_link = sanitize_text_field( $_REQUEST['slider_link'] );
+    update_post_meta( $post_id, '_slider_link', $slider_link );
   }
 }
 add_action( 'save_post_slider-image', 'slider_link_save_meta_box_data' );

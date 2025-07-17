@@ -69,7 +69,11 @@ function gwt_wp_breadcrumb() {
 		elseif (is_month()) {echo "<li>"; the_time('F Y'); echo '</li>';}
 		elseif (is_year()) {echo "<li>"; the_time('Y'); echo '</li>';}
 		elseif (is_author()) {echo "<li>Author Archive"; echo '</li>';}
-		elseif (isset($_GET['paged']) && !empty($_GET['paged'])) {echo "<li>Blog Archives"; echo '</li>';}
+		elseif (isset($_GET['paged']) && !empty($_GET['paged'])) {
+			$paged = intval($_GET['paged']);
+			echo "<li>Blog Archives";
+			echo '</li>';
+		}
 		elseif (is_search()) {echo "<li>Search Results"; echo '</li>';}
 	}
 	echo '</ul>';

@@ -20,7 +20,9 @@
 function gwt_switch_theme() {
 	switch_theme( WP_DEFAULT_THEME, WP_DEFAULT_THEME );
 
-	unset( $_GET['activated'] );
+	if ( isset( $_GET['activated'] ) ) {
+		unset( $_GET['activated'] );
+	}
 
 	add_action( 'admin_notices', 'gwt_upgrade_notice' );
 }
@@ -64,6 +66,7 @@ add_action( 'load-customize.php', 'gwt_customize' );
  */
 function gwt_preview() {
 	if ( isset( $_GET['preview'] ) ) {
+		$preview = sanitize_text_field( $_GET['preview'] );
 		wp_die( sprintf( __( 'GWT requires at least WordPress version 4.4. You are running version %s. Please upgrade and try again.', 'gwt' ), $GLOBALS['wp_version'] ) );
 	}
 }
