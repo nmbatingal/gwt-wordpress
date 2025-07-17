@@ -118,4 +118,6 @@ require get_template_directory() . '/inc/function-enable-classic-widgets.php';
  */
 require get_template_directory() . '/inc/function-enable-classic-posts.php';
 
+add_theme_support( 'wp-block-styles' );
+
 ?>
