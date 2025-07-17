@@ -198,6 +198,31 @@
         <?php govph_displayoptions('govph_custom_footer_background_color');
         ?>
     }
+    .screen-reader-text {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0,0,0,0);
+        border: 0;
+    }
+    .screen-reader-text:focus {
+        position: static;
+        width: auto;
+        height: auto;
+        margin: 0;
+        overflow: visible;
+        clip: auto;
+        background: #fff;
+        color: #222;
+        z-index: 100000;
+        padding: 15px 23px 14px;
+        font-size: 1.2em;
+        outline: 2px solid #005ea5;
+        outline-offset: 2px;
+    }
     </style>
     <script type="text/javascript" language="javascript">
     var template_directory = '<?php echo get_template_directory_uri() ?>';
@@ -205,6 +230,7 @@
 </head>
 
 <body <?php body_class(); ?>>
+<a class="skip-link screen-reader-text" href="#main-content"><?php _e( 'Skip to content', 'gwt_wp' ); ?></a>
 
     <div id="accessibility-shortcuts">
         <ul>
